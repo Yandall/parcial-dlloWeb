@@ -1,8 +1,10 @@
-console.log("prubea")
 document.getElementById("tipoId").value = "000"
-
-let personas = [
-]
+let personas = []
+let datos = JSON.parse(localStorage.getItem("lista"))
+if(datos != null){
+    personas = datos
+    actualizarTabla()
+}
 
 function crearPersona(){
     let personaTemp = obtenerValores()
@@ -10,6 +12,7 @@ function crearPersona(){
         console.log("no existe")
         personaTemp.icm = calcularICM(personaTemp.peso, personaTemp.estatura)
         personas.push(personaTemp)
+        guardarStorage()
         actualizarTabla()
         limpiarFormulario()
     } else{
@@ -76,6 +79,7 @@ function editarPersona(){
         document.getElementById("btnEditarPersona").style.display = "none"
         document.getElementById("tipoId").disabled = false
         document.getElementById("id").disabled = false
+        guardarStorage()
         limpiarFormulario()
         actualizarTabla()
     } else {
@@ -85,6 +89,7 @@ function editarPersona(){
 
 function eliminarPersona(indice) {
     personas.splice(indice, 1)
+    guardarStorage()
     actualizarTabla()
 }
 
@@ -107,6 +112,7 @@ function limpiarFormulario(){
 
 function actualizarTabla(){
     let lista = document.getElementById("listaPersonas")
+    personas = JSON.parse(localStorage.getItem("lista"))
     let valores = ""
     for(let i = 0; i < personas.length; i++){
         let persona = personas[i]
@@ -129,7 +135,9 @@ function calcularICM(peso, estatura){
     return (peso / Math.pow(estatura / 100, 2)).toFixed(1)
 }
 
-
+function guardarStorage(){
+    localStorage.setItem("lista", JSON.stringify(personas))
+}
 
 
 
