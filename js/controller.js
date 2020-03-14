@@ -6,14 +6,14 @@ let personas = [
 
 function crearPersona(){
     let personaTemp = obtenerValores()
-    if(!existe(personaTemp)){
+    if(!camposVacios() && !existe(personaTemp)){
         console.log("no existe")
         personaTemp.icm = calcularICM(personaTemp.peso, personaTemp.estatura)
         personas.push(personaTemp)
         actualizarTabla()
         limpiarFormulario()
     } else{
-        console.log("existe")
+        alert("La persona ya existe o faltó llenar un campo")
     }
 }
 
@@ -40,6 +40,15 @@ function obtenerValores(){
     return temporal
 }
 
+function camposVacios(){
+    let personaTemp = obtenerValores()
+    let resultado = false
+    if(personaTemp.tipoId == "000" || personaTemp.nombre == "" || personaTemp.apellido == "" || personaTemp.correo == "" || personaTemp.peso == "" || personaTemp.estatura == "") {
+        resultado = true
+    }
+    return resultado
+}
+
 function cargarFormulario(indicePersona){
     let personaTemp = personas[indicePersona]
     document.getElementById("tipoId").value = personaTemp.tipoId
@@ -58,23 +67,25 @@ function cargarFormulario(indicePersona){
 
 function editarPersona(){
     let personaTemp = obtenerValores()
-    let indice = personas.findIndex(element => element.id == personaTemp.id)
-    personaTemp.icm = calcularICM(personaTemp.peso, personaTemp.estatura)
-    personas.splice(indice, 1, personaTemp)
-    
-    document.getElementById("btnCrearPersona").style.display = "inline"
-    document.getElementById("btnEditarPersona").style.display = "none"
-    document.getElementById("tipoId").disabled = false
-    document.getElementById("id").disabled = false
-    
-    limpiarFormulario()
-    actualizarTabla()
+    if(!camposVacios()){
+        let indice = personas.findIndex(element => element.id == personaTemp.id)
+        personaTemp.icm = calcularICM(personaTemp.peso, personaTemp.estatura)
+        personas.splice(indice, 1, personaTemp)
+
+        document.getElementById("btnCrearPersona").style.display = "inline"
+        document.getElementById("btnEditarPersona").style.display = "none"
+        document.getElementById("tipoId").disabled = false
+        document.getElementById("id").disabled = false
+        limpiarFormulario()
+        actualizarTabla()
+    } else {
+        alert("Debes llenar todos los campos")    
+    }
 }
 
 function eliminarPersona(indice) {
     personas.splice(indice, 1)
     actualizarTabla()
-
 }
 
 function verEstado(indice) {
