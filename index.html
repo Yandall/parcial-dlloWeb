@@ -16,20 +16,20 @@
 
 <body>
 
-    <div class="">
+    <div class="formulario">
         <h1>Calcule su índice de masa corporal</h1>
         <div class="card">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2 text-muted">Por favor llene todos los campos para poder calcular su IMC</h6>
-                <form action="javascript:void(0)" onsubmit="crearEstudiante()">
+                <form action="javascript:void(0)" onsubmit="crearPersona()">
                     <div class="form-group">
                         <label for="tipoId">Tipo de identificación</label>
                         <select class="form-control" name="tipoId" id="tipoId">
                             <option value="000" disabled>Seleccione un tipo de identificación</option>
-                            <option value="001">CC</option>
-                            <option value="002">CE</option>
-                            <option value="003">RN</option>
-                            <option value="004">TI</option>
+                            <option value="CC">CC</option>
+                            <option value="CE">CE</option>
+                            <option value="RN">RN</option>
+                            <option value="TI">TI</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -49,18 +49,18 @@
                         <input class="form-control" type="email" name="" id="correo" placeholder="Ingrese su correo">
                     </div>
                     <div class="form-group">
-                        <label for="edad">Peso</label>
-                        <input class="form-control" type="number" placeholder="Ingrese su peso en kg" id="peso">
+                        <label for="peso">Peso</label>
+                        <input class="form-control" type="number" step="0.1" placeholder="Ingrese su peso en kg" id="peso">
                     </div>
                     <div class="form-group">
-                        <label for="edad">Estatura</label>
+                        <label for="estatura">Estatura</label>
                         <input class="form-control" type="number" placeholder="Ingrese su estatura en cm" id="estatura">
                     </div>
                     
                     <input 
                     id="btnCrearPersona"
                     class="btn btn-primary" type="submit"
-                     value="Crear calcular ICM">
+                     value="Calcular ICM">
                 </form>
             </div>
         </div>
@@ -72,16 +72,17 @@
                 <th scope="col">Correo</th>
                 <th scope="col">Peso</th>
                 <th scope="col">Estatura</th>
+                <th scope="col">ICM</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
-            <tbody id="listaEstudiantes">
+            <tbody id="listaPersonas">
            
             </tbody>
           </table>
 
     </div>
-    <script src="../js/estudiantes.js"></script>
+    <script src="js/controller.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
